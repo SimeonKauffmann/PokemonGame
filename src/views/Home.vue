@@ -1,18 +1,36 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="about">
+    <h1>Welcome back {{ $store.state.username }}</h1>
+
+    <img
+      v-for="pokemon in pokemons"
+      :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon}.png`"
+      :key="pokemon"
+      alt="no pokemon :("
+    />
+    <b-nav vertical class="w-25">
+      <router-link to="/"
+        ><b-nav-item active>Change User</b-nav-item></router-link
+      >
+      <b-nav-item><router-link to="/pokedex">Pokedex</router-link></b-nav-item>
+      <b-nav-item><router-link to="/fight">Fight</router-link></b-nav-item>
+    </b-nav>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  computed: {
+    pokemons: {
+      get() {
+        return this.$store.state.pokemons;
+      },
+    },
+  },
+};
 </script>
+
+
+
+<style lang="scss">
+</style>
