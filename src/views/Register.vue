@@ -1,44 +1,44 @@
 <template>
-  <b-container>
-    <b-row>
-      <b-form-group id="username" label="Your User Name:" label-for="username">
-        <b-form-input id="username" v-model="username" required></b-form-input>
-      </b-form-group>
-    </b-row>
-    <b-row>
-      <b-form-group label="Select Your First Pokemon!">
+  <div>
+    <b-form @submit="onSubmit">
+      <h2>Select Your First Pokemon!</h2>
+
+      <div id="pokemon-container">
         <div class="pokemon-select">
-          <b-form-radio v-model="firstPokemon" name="firstPokemon" value="1"
+          <b-form-radio v-model="firstPokemon" name="firstPokemon" :value="1"
             >Bulbasaur</b-form-radio
           >
           <img
-            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png`"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
             alt="Bulbasaur"
           />
         </div>
 
         <div class="pokemon-select">
-          <b-form-radio v-model="firstPokemon" name="firstPokemon" value="4"
+          <b-form-radio v-model="firstPokemon" name="firstPokemon" :value="4"
             >Charmander</b-form-radio
           >
           <img
-            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png`"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
             alt="Charmander"
           />
         </div>
+
         <div class="pokemon-select">
-          <b-form-radio v-model="firstPokemon" name="firstPokemon" value="7"
+          <b-form-radio v-model="firstPokemon" name="firstPokemon" :value="7"
             >Squirtle</b-form-radio
           >
           <img
-            :src="`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png`"
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"
             alt="Squirtle"
           />
         </div>
-      </b-form-group>
-    </b-row>
-    <b-button variant="danger">Gotta catch 'em all!</b-button>
-  </b-container>
+      </div>
+      <input v-model="username" id="username" required placeholder="Username" />
+      <b-button type="submit" variant="danger">Gotta catch 'em all!</b-button>
+    </b-form>
+    {{ $store.state.pokemons }}
+  </div>
 </template>
 
 
@@ -56,6 +56,21 @@ export default {
         return this.$store.state.username;
       },
     },
+    firstPokemon: {
+      set(firstPokemon) {
+        this.$store.commit("setFirstPokemon", firstPokemon);
+      },
+      get() {
+        return this.$store.state.firstPokemon;
+      },
+    },
+  },
+  methods: {
+    onSubmit(event) {
+      event.preventDefault();
+      this.$store.commit("formSubmit");
+      this.$router.push({ path: "/" });
+    },
   },
   name: "Register",
   // components: {
@@ -64,8 +79,17 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.pokemon-select {
-  width: 100px;
+<style lang="scss" scoped>
+h2 {
+  margin-top: 100px;
+}
+#pokemon-container {
+  display: flex;
+  width: 60vw;
+  justify-content: space-around;
+  margin: 20px auto;
+  .pokemon-select {
+    width: 100px;
+  }
 }
 </style>

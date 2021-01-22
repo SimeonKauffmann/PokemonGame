@@ -20,6 +20,10 @@
 
 <script>
 export default {
+  created() {
+    this.$store.commit("startGame");
+    if (!this.$store.state.username) this.$router.push("Register");
+  },
   computed: {
     pokemons: {
       get() {

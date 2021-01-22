@@ -5,17 +5,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    id: 1,
-    pokemons: [1, 60, 35, 20],
-    username: 'User Name',
-    ditto: 'DITTTO!'
+    pokemons: JSON.parse(localStorage.getItem("pokemons") || "[]"),
+    username: null,
+    ditto: 'DITTTO!',
+    firstPokemon: 1
   },
   mutations: {
+    startGame(state) {
+      if (JSON.parse(localStorage.getItem("username"))) {
+        state.username = JSON.parse(localStorage.getItem("username"))
+      }
+    },
     setUsername(state, username) {
       state.username = username
+    },
+    setFirstPokemon(state, firstPokemon) {
+      state.firstPokemon = firstPokemon
+    },
+    formSubmit(state) {
+      localStorage.setItem('username', JSON.stringify(state.username))
+      state.pokemons.push(state.firstPokemon)
+      localStorage.setItem('pokemons', JSON.stringify(state.pokemons))
     }
   },
   actions: {
+
   },
   modules: {
   }
