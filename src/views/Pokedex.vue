@@ -1,7 +1,13 @@
 <template>
   <div>
+    <router-link to="/"><b-button class="btn-home">Home</b-button></router-link>
     <h1>Pokedex</h1>
-    <table class="table-striped table-hover">
+    <b-button v-if="this.pokemon.length === 1" @click="onBackClick"
+      >Back</b-button
+    >
+    <input v-model="pokeSearch" id="pokeSearch" />
+    <b-button @click="onPokeSearch">Search</b-button>
+    <table v-if="this.pokemon[0]" class="table-striped table-hover">
       <thead>
         <th>Image</th>
         <th>Name</th>
@@ -20,41 +26,56 @@
         </tr>
       </tbody>
     </table>
+    <p v-else>No pokemon :'(</p>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-
 export default {
   created() {
-    Vue.axios
-      .get(" https://pokeapi.co/api/v2/pokemon?limit=150&offset=0")
-      .then((response) => {
-        const pokemon = response.data.results;
-        pokemon.forEach((pokemon) => {
-          delete pokemon.url;
-        });
-
-        pokemon.forEach((pokemon) => {
-          pokemon.image = null;
-        });
-
-        for (let i = 0; i < pokemon.length; i++) {
-          pokemon[i].id = i + 1;
-          if (this.$store.state.pokemons.find((pokemon) => pokemon === i)) {
-            pokemon[
-              i - 1
-            ].image = `<img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png">`;
-          }
+    this.pokemon = this.$store.state.pokemonList;
+  },
+  computed: {
+    pokeName() {
+      return this.$route.params.pokeSearch;
+    },
+    pokemonList() {
+      return this.$store.state.pokemonList;
+    },
+  },
+  methods: {
+    onPokeSearch() {
+      this.$router.push(`/pokedex/${this.pokeSearch}`);
+      this.pokeSearch = null;
+    },
+    onBackClick() {
+      this.pokeSearch = null;
+      this.$router.push(`/pokedex`);
+      this.pokemon = this.pokemonList;
+    },
+  },
+  watch: {
+    pokeName: function () {
+      if (this.pokeName) {
+        let pokeFind = this.pokemonList.find(
+          (pokemon) => pokemon.name === this.pokeName
+        );
+        if (pokeFind) {
+          const pokemon = [];
+          pokemon.push(pokeFind);
+          this.pokemon = pokemon;
+        } else {
+          this.pokemon = [];
         }
-
-        this.pokemon = pokemon;
-      });
+      } else {
+        this.pokemon = this.pokemonList;
+      }
+    },
   },
   data() {
     return {
-      pokemon: null,
+      pokeSearch: null,
+      pokemon: [],
     };
   },
   name: "Pokedex",
@@ -62,6 +83,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+table {
+  margin: 3px auto;
+  width: 60vw;
+}
+.btn-home {
+  float: left;
+}
+input {
+  margin: 30px;
+}
 tr {
   height: 50px;
   img {

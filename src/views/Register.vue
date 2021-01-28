@@ -37,7 +37,6 @@
       <input v-model="username" id="username" required placeholder="Username" />
       <b-button type="submit" variant="danger">Gotta catch 'em all!</b-button>
     </b-form>
-    {{ $store.state.pokemons }}
   </div>
 </template>
 

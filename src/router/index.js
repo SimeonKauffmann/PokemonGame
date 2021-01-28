@@ -18,10 +18,10 @@ const routes = [
     component: Register
   },
   {
-    path: '/pokedex',
+    path: '/pokedex/:pokeSearch?',
     name: 'Pokedex',
     component: Pokedex
-  }
+  },
 ]
 
 const router = new VueRouter({
