@@ -10,6 +10,14 @@ import VueAxios from 'vue-axios'
 
 import './main.scss'
 
+if ('serviceWorker' in navigator) {
+  console.log('hi!!!!!!')
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
+
+
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

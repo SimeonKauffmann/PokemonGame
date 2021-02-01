@@ -10,8 +10,8 @@
 - [x] Minst en .vue-komponent, som inte är App.vue eller en Vue Router-sida/destination, skapas
 - [x] Minst en komponent ska ta emot, och använda, minst en prop (via props-nyckeln)
 - [x] Minst en Bootstrap-Vue-komponent används
-- [ ] Webbapplikationen ska nyttja ett Web App Manifest, som ska vara genererad via Vue CLI:s PWA-plugin – - webbapplikationen ska, via detta manifest, ha ett eget appnamn, en egen temafärg, och egna ikoner
-- [ ] Webbapplikationen ska fungera offline, och all information, inklusive informationen som hämtats med GET-anropen, måste gå att se även när användaren är offline – använd en Service Worker för detta, som är genererad via Vue CLI:s PWA-plugin
+- [x] Webbapplikationen ska nyttja ett Web App Manifest, som ska vara genererad via Vue CLI:s PWA-plugin – - webbapplikationen ska, via detta manifest, ha ett eget appnamn, en egen temafärg, och egna ikoner
+- [x] Webbapplikationen ska fungera offline, och all information, inklusive informationen som hämtats med GET-anropen, måste gå att se även när användaren är offline – använd en Service Worker för detta, som är genererad via Vue CLI:s PWA-plugin
 - [x] Källkoden för projektet publiceras på GitHub (eller liknande)
 - [ ] Webbapplikationen ska publiceras på GitHub Pages (eller liknande)
 - [ ] Inlämningen ska endast bestå av ett dokument med 1) projektets Clone URL och 2) det publicerade projektets webbadress (Om din repository är privat, bjud då in användaren "jonkri" på GitHub/GitLab) (Använd inte Apple Pages-formatet)
@@ -27,6 +27,6 @@
 - [x] Använd minst ett Vue Router-adressparametervärde
 - [x] Bootstrap ska anpassas via minst en Sass-variabel
 - [x] Minst en komponent använder Sass, via style-elementet, i sin .vue-fil
-- [ ] Webbapplikationen ska (visuellt) indikera för användaren att användaren är offline, om användaren är (eller går) offline
-- [ ] Webbapplikationen ska erbjuda en “custom install experience” 
+- [x] Webbapplikationen ska (visuellt) indikera för användaren att användaren är offline, om användaren är (eller går) offline
+- [x] Webbapplikationen ska erbjuda en “custom install experience” 
 - [x] Projektet är konfigurerat med någon sorts browserlist-konfiguration för explicit webbläsarkompabilitet
