@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                'npm ci && npm build'
+                echo 'npm ci && npm build'
             }
         }
         stage('test') {
             steps {
-                'node --version'
+                echo 'node --version'
             }
         }
         stage('deploy') {
             steps {
-                'echo "deploying"'
+                echo 'echo "deploying"'
             }
         }
     }
