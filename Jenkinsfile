@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo 'npm ci && npm build'
+                echo 'npm ci changed everything!'
             }
         }
         stage('test') {
